@@ -43,7 +43,7 @@ ofxSearchNetworkNode::~ofxSearchNetworkNode()
 	disconnect();
 	sleep();
 }
-void ofxSearchNetworkNode::setup(int port, const std::string &name, const std::string &group)
+void ofxSearchNetworkNode::setup(uint16_t port, const std::string &name, const std::string &group)
 {
 	port_ = port;
 	receiver_.setup(port);
