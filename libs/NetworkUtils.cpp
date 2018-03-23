@@ -36,12 +36,12 @@ std::vector<NetworkUtils::IPv4Interface> NetworkUtils::getIPv4Interface()
 	if(getifaddrs(&ifas) != 0) {
 		return {};
 	}
-	vector<IPv4Interface> ret;
+	std::vector<IPv4Interface> ret;
 	for(ifa = ifas; ifa != nullptr; ifa=ifa->ifa_next) {
 		if (ifa->ifa_addr->sa_family == AF_INET) {
 			IPv4Interface result;
 			result.name = ifa->ifa_name;
-			auto get_address = [](sockaddr_in *ifa_addr, unsigned int &dst_raw, string &dst_str) {
+			auto get_address = [](sockaddr_in *ifa_addr, std::uint32_t &dst_raw, string &dst_str) {
 				char str[INET_ADDRSTRLEN] = {};
 				dst_raw = ifa_addr->sin_addr.s_addr;
 				inet_ntop(AF_INET, &dst_raw, str, sizeof(str));
@@ -94,14 +94,14 @@ std::vector<NetworkUtils::IPv4Interface> NetworkUtils::getIPv4Interface()
 			}
 		}
 	}
-	vector<IPv4Interface> ret;
+	std::vector<IPv4Interface> ret;
 	while(if_info) {
 		IPv4Interface result;
 		result.name = if_info->AdapterName;
 		ULONG addr = ((sockaddr_in*)(if_info->FirstUnicastAddress->Address.lpSockaddr))->sin_addr.s_addr;
 		ULONG mask;
 		ConvertLengthToIpv4Mask(if_info->FirstUnicastAddress->OnLinkPrefixLength, &mask);
-		auto get_address = [](ULONG addr, unsigned int &dst_raw, string &dst_str) {
+		auto get_address = [](ULONG addr, std::uint32_t &dst_raw, string &dst_str) {
 			char str[INET_ADDRSTRLEN] = {};
 			dst_raw = addr;
 			inet_ntop(AF_INET, &dst_raw, str, sizeof(str));
