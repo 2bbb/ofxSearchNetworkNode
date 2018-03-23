@@ -20,7 +20,7 @@ namespace NetworkUtils
 	struct IPv4Interface {
 		std::string name;
 		std::string ip, netmask, broadcast;
-		unsigned int ip_raw, netmask_raw, broadcast_raw;
+		std::uint32_t ip_raw, netmask_raw, broadcast_raw;
 		bool isInSameNetwork(const std::string &hint) const;
 	};
 	std::string getHostName();
