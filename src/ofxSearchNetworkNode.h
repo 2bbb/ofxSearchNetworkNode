@@ -21,7 +21,7 @@ class ofxSearchNetworkNode
 public:
 	ofxSearchNetworkNode();
 	virtual ~ofxSearchNetworkNode();
-	void setup(int port, const std::string &name="", const std::string &group="");
+	void setup(std::uint16_t port, const std::string &name="", const std::string &group="");
 	void setName(const std::string &name);
 	void setGroup(const std::string &group, bool refresh=true);
 	const std::string& getName() const { return name_; }
@@ -96,7 +96,7 @@ private:
 	std::vector<std::string> group_;
 	std::vector<std::string> target_ip_;
 	
-	int port_;
+	std::uint16_t port_;
 	bool allow_loopback_=false;
 	bool is_sleep_=false;
 	ofxOscReceiver receiver_;
